@@ -1,11 +1,12 @@
-package org.coltec.model;
+package org.coltec.Model;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
-import org.coltec.util.DateConverter;
+import org.coltec.Model.JournalEntry;
+import org.coltec.Util.DateConverter;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -13,7 +14,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -75,19 +75,18 @@ public class JournalManager {
 
     private void exportToJson(String fileName) throws IOException {
         String projectDir = System.getProperty("user.dir");
-        String resourcesDir = projectDir + "\\src\\main\\java\\org\\coltec\\resources\\";
+        String resourcesDir = projectDir + "/src/main/java/org/coltec/exports/";
         String filePath = resourcesDir + fileName + ".json";
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (FileWriter writer = new FileWriter(filePath)) {
             gson.toJson(entries, writer);
         }
-        System.out.println("Exportado para: " + filePath);
     }
 
     private void exportToCsv(String fileName) throws IOException {
         String projectDir = System.getProperty("user.dir");
-        String resourcesDir = projectDir + "\\src\\main\\java\\org\\coltec\\resources\\";
+        String resourcesDir = projectDir + "/src/main/java/org/coltec/exports/";
         String filePath = resourcesDir + fileName + ".csv";
 
         try (FileWriter writer = new FileWriter(filePath)) {
@@ -96,11 +95,10 @@ public class JournalManager {
                 writer.write(String.format("%s,%s,%s\n", entry.getText(), DateConverter.dateToString(entry.getDate()), String.join(";", entry.getCategories())));
             }
         }
-        System.out.println("Exportado para: " + filePath);
     }
 
     public void importEntries(String fileName, String format) throws IOException {
-        String resourcesDir = "./src/main/java/org/coltec/resources/";
+        String resourcesDir = "./src/main/java/org/coltec/exports/";
         String filePath = resourcesDir + fileName + "." + format.toLowerCase();
 
         if (format.equalsIgnoreCase("json")) {
@@ -108,7 +106,7 @@ public class JournalManager {
         } else if (format.equalsIgnoreCase("csv")) {
             importFromCsv(filePath);
         } else {
-            throw new IllegalArgumentException("Unsupported format: " + format);
+            throw new IllegalArgumentException("Formato não suportado: " + format);
         }
     }
 

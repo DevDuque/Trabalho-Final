@@ -1,4 +1,4 @@
-package org.coltec.model;
+package org.coltec.Model;
 
 import java.util.Date;
 import java.util.List;

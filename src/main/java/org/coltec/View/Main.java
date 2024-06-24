@@ -1,8 +1,8 @@
-package org.coltec.view;
+package org.coltec.View;
 
-import org.coltec.model.JournalEntry;
-import org.coltec.model.JournalManager;
-import org.coltec.util.DateConverter;
+import org.coltec.Model.JournalEntry;
+import org.coltec.Model.JournalManager;
+import org.coltec.Util.DateConverter;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -89,25 +89,26 @@ public class Main {
     }
 
     private static void filterEntries() throws ParseException {
-        System.out.print("Data inicial (dd/MM/yyyy) ou enter para pular: ");
+        System.out.print("Data inicial (dd/MM/yyyy): ");
         String startDateString = scanner.nextLine().trim();
-        Date startDate = null;
         if (!startDateString.isEmpty()) {
-            startDate = DateConverter.stringToDate(startDateString);
+            DateConverter.stringToDate(startDateString);
         }
 
-        System.out.print("Data final (dd/MM/yyyy) ou enter para pular: ");
+        System.out.print("Data final (dd/MM/yyyy) ");
         String endDateString = scanner.nextLine().trim();
-        Date endDate = null;
         if (!endDateString.isEmpty()) {
-            endDate = DateConverter.stringToDate(endDateString);
+            DateConverter.stringToDate(endDateString);
         }
 
         System.out.print("Categorias (separadas por vírgula) ou enter para pular: ");
         String categoriesString = scanner.nextLine().trim();
-        List<String> categories = null;
+        List<String> categories = new ArrayList<>();
         if (!categoriesString.isEmpty()) {
-            categories = List.of(categoriesString.split(","));
+            String[] categoryArray = categoriesString.split(",");
+            for (String category : categoryArray) {
+                categories.add(category.trim());
+            }
         }
 
         List<JournalEntry> filteredEntries = journalManager.filterEntries(startDateString, endDateString, categories);

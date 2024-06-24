@@ -1,9 +1,4 @@
-package org.coltec.util;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+package org.coltec.Util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
