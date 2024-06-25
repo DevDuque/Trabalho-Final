@@ -75,7 +75,7 @@ public class JournalManager {
 
     private void exportToJson(String fileName) throws IOException {
         String projectDir = System.getProperty("user.dir");
-        String resourcesDir = projectDir + "/src/main/java/org/coltec/exports/";
+        String resourcesDir = projectDir + "/src/main/java/org/coltec/Exports/";
         String filePath = resourcesDir + fileName + ".json";
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -86,7 +86,7 @@ public class JournalManager {
 
     private void exportToCsv(String fileName) throws IOException {
         String projectDir = System.getProperty("user.dir");
-        String resourcesDir = projectDir + "/src/main/java/org/coltec/exports/";
+        String resourcesDir = projectDir + "/src/main/java/org/coltec/Exports/";
         String filePath = resourcesDir + fileName + ".csv";
 
         try (FileWriter writer = new FileWriter(filePath)) {
@@ -98,7 +98,7 @@ public class JournalManager {
     }
 
     public void importEntries(String fileName, String format) throws IOException {
-        String resourcesDir = "./src/main/java/org/coltec/exports/";
+        String resourcesDir = "./src/main/java/org/coltec/Exports/";
         String filePath = resourcesDir + fileName + "." + format.toLowerCase();
 
         if (format.equalsIgnoreCase("json")) {
