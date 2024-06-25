@@ -69,7 +69,7 @@ public class JournalManager {
         } else if (format.equalsIgnoreCase("csv")) {
             exportToCsv(filePath);
         } else {
-            throw new IllegalArgumentException("Unsupported format: " + format);
+            throw new IllegalArgumentException("Formato não suportado: " + format);
         }
     }
 
